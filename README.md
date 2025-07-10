@@ -13,13 +13,13 @@ npm install
 ### Running the JavaScript version
 
 ```bash
-node index.js
+node test.js
 ```
 
 ### Running the TypeScript version
 
 ```bash
-npx ts-node index.ts
+npx ts-node test.ts
 ```
 
 ### Running a local server for webhook testing
@@ -29,7 +29,13 @@ You can also run a local Express server to receive and verify webhooks.
 To start the server (TypeScript):
 
 ```bash
-npm run dev
+npx ts-node-dev --respawn --transpile-only index.ts
+```
+
+To start the server (JavaScript):
+
+```bash
+ node --watch index.js
 ```
 
 The server will listen for POST requests at:

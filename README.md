@@ -22,6 +22,30 @@ node index.js
 npx ts-node index.ts
 ```
 
+### Running a local server for webhook testing
+
+You can also run a local Express server to receive and verify webhooks.
+
+To start the server (TypeScript):
+
+```bash
+npm run dev
+```
+
+The server will listen for POST requests at:
+
+```
+POST /api/v1/hook/fal-ai/images
+```
+
+It expects raw body and the following headers:
+- `x-fal-webhook-request-id`
+- `x-fal-webhook-user-id`
+- `x-fal-webhook-timestamp`
+- `x-fal-webhook-signature`
+
+The server will verify the signature and respond with a 200 status if valid, or 401 if invalid.
+
 ## How it works
 
 The library verifies webhook signatures by:
@@ -49,4 +73,5 @@ console.log('Signature valid:', isValid);
 
 - `libsodium-wrappers`: For Ed25519 signature verification
 - `node-fetch`: For HTTP requests to JWKS endpoint
+- `express` and `body-parser`: For running the webhook server
 - `typescript` and `ts-node`: For TypeScript support (dev dependencies)
